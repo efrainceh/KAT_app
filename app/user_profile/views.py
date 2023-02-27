@@ -3,7 +3,7 @@ import shutil
 from flask import abort, render_template, redirect, url_for, jsonify, jsonify
 from flask_login import login_required, logout_user, current_user
 from . import user_profile
-from .. import db, PROJECT_PATH, GUEST
+from .. import db, PROJECT_PATH, GUEST, RUN_END
 from ..models import User, Run
 from ..helpers import access_denied
 
@@ -24,7 +24,7 @@ def profile(username):
         abort(400)
 
     # Show profile
-    runs = Run.query.filter_by(user_id=current_user.id).all()
+    runs = Run.query.filter_by(user_id=current_user.id, runcode=RUN_END).all()
     if runs is None:
         runs = []
     return render_template("user_profile/profile.html", runs=runs)

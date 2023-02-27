@@ -21,17 +21,15 @@
                 <th>Delete</th>
             </tr>
             {% for run in runs %}
-                {% if run.is_finished() %}
-                    <tr>
-                        <td class="cell" onclick="showFigure(this)">{{ run.id }}</td>
-                        <td class="cell" onclick="showFigure(this)">{{ run.user_runname }}</td>
-                        <td class="cell" onclick="showFigure(this)">{{ run.kmer_size }}</td>
-                        <td class="cell" onclick="showFigure(this)">{{ run.get_date() }}</td>
-                        <td><a href="{{ url_for('result.return_zip',kat_runname=kat_runname) }}" 
-                                target="blank" download>{{ run.user_runname }}.zip</a></td>
-                        <td><input type="button" value="X" onclick="deleteTableRow(this)"></td>
-                    </tr>
-                {% endif %}
+                <tr>
+                    <td class="cell" onclick="showFigure(this)">{{ run.id }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.user_runname }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.kmer_size }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.get_date() }}</td>
+                    <td><a href="{{ url_for('result.return_zip',kat_runname=kat_runname) }}" 
+                        target="blank" download>{{ run.user_runname }}.zip</a></td>
+                    <td><input type="button" value="X" onclick="deleteTableRow(this)"></td>
+                </tr>
             {% endfor %}
         </table>
     </div>
