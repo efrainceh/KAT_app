@@ -3,25 +3,41 @@
 
 <h2>About KAT</h2>
 
-<p>KAT is Kmer Alignment Tool that divides 
-	uses Suffix Arrays and the Burrows-Wheeler Transform in order to align DNA sequences. 
-	The software takes</p>
-	
+<p>
+	The Kmer Alignment Tool takes DNA genome sequences, choppes them up into kmers, and then aligns those kmers to Reference DNA files. 
+	For the alignment it uses a combination of Suffix Arrays and the Burrows-Wheeler Transform.
+</p>
+<h2>Use</h2>
+<p>
+	If you sign is as a Guest, the result files will be uploaded to the webpage after the program is finished. 
+	Once you start a run, do not close the page or you won't be able to access your results.
+	<br>
+	If you Register, then you will have access to your user profile where all your runs will be saved. 
+	You can close the page after starting a run and the results will be uploaded to your profile once the run is finished.
+	<br>
+	You can only have one run at the time, otherwise you will get some funny results.
+</p>
+
+
 <h2>Input</h2>
 <p>KAT requires 4 inputs:</p>
 <ul> 
-	<li><span class="bolded">Project name:</span>Name of the run</li>
-	<li><span class="bolded">Kmer size:</span> One integer from 5 to 1000</li>
-	<li><span class="bolded">Sample file:</span>A DNA sequence in a fasta file</li>
-	<li><span class="bolded">Reference file:</span>A DNA sequence in a fasta file</li>
+	<li><span class="bolded">Project name:</span> Name of the run</li>
+	<li><span class="bolded">Kmer size:</span> This should be an integer between 5 and 1000. It represents the number of basepairs for chopping up the samples.</li>
+	<li><span class="bolded">Sample file:</span> Up to 5 genome DNA sequences in fasta files. These are the samples that will be chopped into kmers.</li>
+	<li><span class="bolded">Reference file:</span> Up to 5 genome DNA sequences in fasta files for the alignment.</li>
 </ul>
-<p>For the fasta files, the program can handle genomes with more than one chromosome and contigs.</p>
+<p>For the fasta files, the program can handle genomes with more than one sequence(e.g. chromosomes and contigs).</p>
 <h2>Results</h2>
-<p>sd</p>
+<p>A zip file can be downloaded that will include the following:</p>
 <ul>
-	<li><span class="bolded">Alignment table:</span>Contains the hits and hit percentage</li>
-	<li><span class="bolded">Alignment positions:</span>A .txt file is created for each sample-reference pair. 
-		The file includes a list of the kmer sequences (from the sample) and their positions in the reference genome.</li>
+	<li><span class="bolded">Alignment table:</span> Contains the hits and hit percentages.</li>
+	<img class="image" src="{{ url_for('static', filename='images/table_example.jpg') }}" alt="Result table example">
+	<li><span class="bolded"> Plots of hits and hit percentages.</span></li>
+	<li><span class="bolded">Alignment textfiles:</span> A .txt file is created for each sample-reference pair. 
+		The file includes a list of the kmer sequences (from the sample) and their positions in the reference genome.
+		In the example, kmer AAACTGGGCAGCAGGGCGGG is found in Reference NZ_CP055292.1 sequence 0, position 3383183.</li>
+		<img class="image" src="{{ url_for('static', filename='images/textfile_example.jpg') }}" alt="Result textfile example">
 </ul>
 
 {% endblock%}
