@@ -12,19 +12,21 @@
 			{% endfor %}
 		</p>
 		<p>
-			{{ form.kmer_size.label }} {{ form.kmer_size(size=4) }}<br>
+			{{ form.kmer_size.label }} {{ form.kmer_size(size=4) }} <label>bp</label><br>
 			{% for error in form.kmer_size.errors %}
 				<span class="error-message">[{{ error }}]</span>
 			{% endfor %}
 		</p>
 		<p>
-			{{ form.samples.label }} {{ form.samples }}<br>
+			{{ form.samples.label }} <label>(up to 5 fasta files)</label><br> 
+			{{ form.samples }}<br>
 			{% for error in form.samples.errors %}
 				<span class="error-message">[{{ error }}]</span>
 			{% endfor %}
 		</p>
 		<p>
-			{{ form.references.label }} {{ form.references }}<br>
+			{{ form.references.label }} <label>(up to 5 fasta files)</label><br>
+			{{ form.references }}<br>
 			{% for error in form.references.errors %}
 				<span class="error-message">[{{ error }}]</span>
 			{% endfor %}
