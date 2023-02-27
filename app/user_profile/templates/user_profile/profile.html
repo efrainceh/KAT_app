@@ -26,7 +26,7 @@
                     <td class="cell" onclick="showFigure(this)">{{ run.user_runname }}</td>
                     <td class="cell" onclick="showFigure(this)">{{ run.kmer_size }}</td>
                     <td class="cell" onclick="showFigure(this)">{{ run.get_date() }}</td>
-                    <td><a href="{{ url_for('result.return_zip',kat_runname=kat_runname) }}" 
+                    <td><a href="{{ url_for('result.return_zip',kat_runname=run.kat_runname) }}" 
                         target="blank" download>{{ run.user_runname }}.zip</a></td>
                     <td><input type="button" value="X" onclick="deleteTableRow(this)"></td>
                 </tr>
