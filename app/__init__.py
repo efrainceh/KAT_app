@@ -1,4 +1,9 @@
 import os
+import sys
+
+APP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, __name__))
+sys.path.append(os.path.join(APP_PATH, "utils"))
+
 from flask import Flask, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -10,7 +15,6 @@ from .config import Config
 
 
 # Global variables
-APP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir, __name__))
 PROJECT_PATH = os.path.join(APP_PATH, "projects")
 GUEST = "guest"             # Guest username registered to the database
 RUN_END = 0                 # Returncode from KAT indicating the program ended succesfully
