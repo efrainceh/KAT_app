@@ -7,20 +7,6 @@ from ..models import Run
 from ..helpers import access_denied
 
 
-def evaluate_access(user, kat_runname, current_session):
-    if user.username == GUEST:
-        # If no run is going or the URL doesn't match the current run
-        if "kat_runname" not in current_session or current_session["kat_runname"] != kat_runname:
-            abort(400)
-        return Run(kmer_size=current_session["kmer_size"], user_runname=current_session["user_runname"], kat_runname=kat_runname, folder=current_session["folder"], user_id=current_user.id)   
-    else:
-        run = Run.query.filter_by(kat_runname=kat_runname).first_or_404()
-        # Check run is accesible and user has access to it
-        if access_denied(run, user):
-            abort(400)
-        return run
-
-
 @result.route("/<string:kat_runname>", methods=["GET"])
 @login_required
 def get_result(kat_runname):
@@ -54,3 +40,17 @@ def image_url(run_id):
     # No user access check. The return is an URL that leads to a route that is protected. 
     data = {"img_URL" : url_for('result.return_images', kat_runname=run.kat_runname, suffix='_percentage')}
     return jsonify(data)
+
+
+def evaluate_access(user, kat_runname, current_session):
+    if user.username == GUEST:
+        # If no run is going or the URL doesn't match the current run
+        if "kat_runname" not in current_session or current_session["kat_runname"] != kat_runname:
+            abort(400)
+        return Run(kmer_size=current_session["kmer_size"], user_runname=current_session["user_runname"], kat_runname=kat_runname, folder=current_session["folder"], user_id=current_user.id)   
+    else:
+        run = Run.query.filter_by(kat_runname=kat_runname).first_or_404()
+        # Check run is accesible and user has access to it
+        if access_denied(run, user):
+            abort(400)
+        return run
