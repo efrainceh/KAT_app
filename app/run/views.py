@@ -58,7 +58,7 @@ def kat_run(kat_runname):
         run = Run(kmer_size=session["kmer_size"], user_runname=session["user_runname"], kat_runname=kat_runname, folder=session["folder"], user_id=current_user.id)
     else:
         run = Run.query.filter_by(kat_runname=kat_runname).first_or_404()
-
+        
         # If this run is not users then abort
         if not run.user_access(current_user.username):
             abort(400)
@@ -67,17 +67,35 @@ def kat_run(kat_runname):
         if run.user_access(current_user.username) and run.is_finished():
             return redirect(url_for("result.get_result", kat_runname=kat_runname))
 
-
     # If this is a new run coming from kat_upload
     global runcodes
     runcodes[kat_runname] = RUN_GOING
+
+    # This thread runs the KAT executable. It will update runcode[kat_runname] to RUN_END once it finishes
     thread_kat = threading.Thread(daemon=True, target=run_KAT_thread, args=(run.kmer_size, run.kat_runname, run.folder, runcodes, kat_runname))
     thread_kat.start()
 
-    thread_end_run_cleanup = threading.Thread(daemon=True, target=end_run_cleanup, args=(run))
+    # This thread cleans up after thread_kat is finished. It needs to be on a different thread in order to keep KAT and the
+    # app separate (KAT doesn't need to know about databases, apps, or anything).
+    # It was previously part of the runcode route, but then if the user closed the browser there was no clean up.
+    thread_end_run_cleanup = threading.Thread(daemon=True, target=end_run_cleanup, args=(current_app._get_current_object(), run))
     thread_end_run_cleanup.start()
 
     return render_template("run/in_progress.html", run=run, guest=GUEST)
+
+def end_run_cleanup(app, run):
+    global runcodes
+    polling2.poll(lambda: runcodes[run.kat_runname] == RUN_END, step=60, timeout=86400)
+    del runcodes[run.kat_runname]
+    if run.user == GUEST:
+        if os.path.exists(run.folder) and os.path.isdir(run.folder):
+            shutil.rmtree(run.folder)
+    else:
+        with app.app_context():
+            # You need to recapture the run before updating it
+            current_run = Run.query.filter_by(kat_runname=run.kat_runname).first()
+            current_run.set_runcode(RUN_END)
+            db.session.commit()
 
 @run.route("/runcode/<string:kat_runname>", methods=["GET"])
 @login_required
@@ -93,16 +111,3 @@ def runcode(kat_runname):
          data = {"runcode" : RUN_END, "next_URL" : url_for("result.get_result", kat_runname=kat_runname)}
 
     return jsonify(data)
-
-def end_run_cleanup(run):
-    global runcodes
-    polling2.poll(lambda: runcodes[run.kat_runname] == RUN_END, step=60, timeout=86400)
-    del runcodes[run.kat_runname]
-    if run.user == GUEST:
-        if os.path.exists(run.folder) and os.path.isdir(run.folder):
-            shutil.rmtree(run.folder)
-    else:    
-        run.set_runcode = RUN_END
-        db.session.commit()
-   
-    
