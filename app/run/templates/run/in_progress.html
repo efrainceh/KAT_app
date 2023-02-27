@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p style="display: inline">Run <span class="bolded">{{ run.user_runname }}</span> in progress<span id="dots"></span></p> 
+<p>If the dots are changing, the app is running. It will redirect once it's finished. Do not close the page.</p>
+
+<p id="kat_id" hidden>{{ run.kat_runname }}</p>
+
+
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+
+<script type="text/javascript" src="{{ url_for('run.static', filename='js/run_progress_check.js') }}"></script>
+
+{% endblock %}

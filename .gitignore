@@ -1,0 +1,10 @@
+# Prerequisites
+*.d
+
+# Folders
+flask_session/
+venv
+
+# Databases
+*.db
+

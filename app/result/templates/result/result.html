@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="border">
+    <h2>Run: <span style="color: black">{{ run.user_runname }}</span></h2>
+    <label>Files:</label>
+    <a href="{{ url_for('result.return_zip', kat_runname=run.kat_runname) }}" target="blank" download>{{ run.user_runname}}.zip</a>
+    <div class="flex-center">
+        <img src="{{ url_for('result.return_images', kat_runname=run.kat_runname, suffix='_hits') }}" alt="bar plot of results: number of hits">
+    </div>
+    <div class="flex-center">
+        <img src="{{ url_for('result.return_images', kat_runname=run.kat_runname, suffix='_percentage') }}" alt="bar plot of results: hit percentage">
+    </div>
+</div>
+
+{% endblock %}

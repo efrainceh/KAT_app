@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>
+	Registration is not required, but it helps you keep track of your runs and saves the results for future access. 
+	Alternative you can run as a guest but the results won't be saved after you close the website. 
+	Click <a href="{{url_for('main_site.register')}}" class="bolded">here</a> to register.
+</p>
+<div class="flex-display">
+	<div class="column border">
+		<form action="{{ url_for('main_site.login') }}" method="POST" novalidate>
+			{{ form.hidden_tag() }}
+			<h2>Login:</h2>
+			<p>
+				{{ form.username.label }}<br>
+				{{ form.username(size=50) }}<br>
+				{% for error in form.username.errors %}
+					<span class="error-message">[{{ error }}]</span>
+				{% endfor %}
+			</p>
+			<p>
+				{{ form.password.label }}<br>
+				{{ form.password(size=50) }}<br>
+				{% for error in form.password.errors %}
+					<span class="error-message">[{{ error }}]</span>
+				{% endfor %}
+			</p>
+			<p>
+				{{ form.remember_me() }} {{ form.remember_me.label }}
+			</p>
+			{% for message in get_flashed_messages() %}
+				<span class="error-message">{{ message }}</span>
+			{% endfor %}
+			<p>{{ form.submit() }}</p>
+		</form>
+	</div>
+	<div class="column border">
+		<form action="{{ url_for('main_site.guest_login') }}" method="POST" novalidate>
+				{{ form.hidden_tag() }}
+				<h2>Sign in as Guest:</h2>
+				<p>{{ form.submit() }}</p>
+		</form>
+	</div>
+</div>
+
+{% endblock %}
+

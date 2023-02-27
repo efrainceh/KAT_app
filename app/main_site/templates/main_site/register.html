@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="border">
+	<form action="{{url_for('main_site.register')}}" method="POST" novalidate>
+		{{ form.hidden_tag() }}
+		<h2>User Registration:</h2>
+		<p>
+			{{ form.username.label }}<br>
+			{{ form.username(size=50) }}<br>
+			{% for error in form.username.errors %}
+			<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.email.label }}<br>
+			{{ form.email(size=50) }}<br>
+			{% for error in form.email.errors %}
+			<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.password.label }}<br>
+			{{ form.password(size=50) }}<br>
+			{% for error in form.password.errors %}
+			<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.confirm_password.label }}<br>
+			{{ form.confirm_password(size=50) }}<br>
+			{% for error in form.confirm_password.errors %}
+			<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+
+	{% for message in get_flashed_messages() %}
+		<h2>{{ message }}</h2>
+	{% endfor %}
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,249 @@
+:root {
+    --main-bg-color: hsl(174, 72%, 56%);
+    ---tx-size: 1em;
+    --link-tx-color: white;
+    --drop-bg-H: 230;
+    --link-bg-color: hsl(var(--drop-bg-H), 100%, 50%);
+    --title-size: 6.5vw;
+    --error-color: hsl(0, 100%, 50%);
+}
+
+/* base.html */
+
+header {
+    overflow:hidden;
+    background-color: var(--main-bg-color);
+    padding: 1em 1em;
+}
+
+.header-right{
+    float: right;
+}
+
+.dropdown {
+    float: left;
+}
+
+.header-link, .dropbtn, .dropdown a {
+    font-family: sans-serif;
+    color: var(--link-tx-color);
+    font-size: calc(var(--tx-size) * 10);
+    text-decoration: none;
+    background-color: var(--link-bg-color);
+    width: 5.5em;
+    padding: 0.25em;
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+
+.header-link {
+    float: left;
+    border-radius: 0.25em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+} 
+
+.dropbtn {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-radius: 0.25em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.dropdown a{
+    display: flex;
+    justify-content: center;
+    background-color: hsl(var(--drop-bg-H), 90%, 85%);
+    cursor: pointer;
+}   
+
+.dropdown-content {
+    border-color: black;
+    border-style: solid;
+    border-width: thin;
+    position: absolute;
+    opacity: 0;
+}
+
+.dropdown-content a:hover {
+    background-color: hsl(var(--drop-bg-H), 90%, 50%);
+    color: var(--link-tx-color);
+}
+
+.show {
+    /* transform: translateX(1em); */
+    transform: translate(1em, 0.1em);
+    opacity: 1;
+}
+
+@media screen and (max-width: 500px) {
+    .header .header-link {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+}
+
+body {
+    font-family: sans-serif;
+    color: black;
+    font-size: var(--tx-size);
+    background-color: white;
+}
+
+.title-box {
+    font-family: 'Press Start 2P';
+    color: var(--link-bg-color);
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--main-bg-color);
+    width: 75%;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    border-style: dotted;
+    border-color: white;
+    border-radius: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#title {
+    font-size: var(--title-size);
+    text-shadow: -0.1em 0.1em whitesmoke;
+    padding-top: 0.5em;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#subtitle {
+    font-size: calc(var(--title-size) * 0.55);
+    text-shadow: -0.1em 0.1em whitesmoke;
+    padding-top: 0;
+    padding-bottom: 0.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.block-content {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h2 {
+    font-size: calc(var(---tx-size) * 1.5);
+    line-height: 1.5em;
+    font-weight: bold;
+    color: var(--link-bg-color);
+}
+
+p {
+    line-height: 1.5em;
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+.border {
+    border-style: dotted;
+    border-color: var(--main-bg-color);
+    border-radius: 0.5em;
+    padding-left: 1em;
+}
+
+.error-message {
+    color: var(--error-color);
+}
+
+/* login.html, profile.html result.html*/
+
+.flex-display {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    flex: 50%;
+    background-color: white;
+    margin-right: 5%;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* profile.html */
+
+#newrunbtn {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background-color: blue; 
+}
+
+#deletebtn {
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: black; 
+}
+
+table {
+    border-style: solid;
+    border-color: blue;
+    margin: 1em 1em;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+#table-header {
+    background-color: #40e0d080;
+    color: blue;
+}
+
+.cell:hover {
+    cursor: pointer;
+}
+
+/* General */
+
+.image{
+    max-width: 100%;
+}
+
+
+.button {
+    height: 2em;
+}
+
+.form_buttons {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Error htmls */
+
+#oops {
+    font-family: 'Press Start 2P';
+    font-size: var(--title-size);
+    color: var(--link-bg-color);
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+    margin-top: 2em;
+}

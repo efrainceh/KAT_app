@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>About KAT</h2>
+
+<p>KAT is Kmer Alignment Tool that divides 
+	uses Suffix Arrays and the Burrows-Wheeler Transform in order to align DNA sequences. 
+	The software takes</p>
+	
+<h2>Input</h2>
+<p>KAT requires 4 inputs:</p>
+<ul> 
+	<li><span class="bolded">Project name:</span>Name of the run</li>
+	<li><span class="bolded">Kmer size:</span> One integer from 5 to 1000</li>
+	<li><span class="bolded">Sample file:</span>A DNA sequence in a fasta file</li>
+	<li><span class="bolded">Reference file:</span>A DNA sequence in a fasta file</li>
+</ul>
+<p>For the fasta files, the program can handle genomes with more than one chromosome and contigs.</p>
+<h2>Results</h2>
+<p>sd</p>
+<ul>
+	<li><span class="bolded">Alignment table:</span>Contains the hits and hit percentage</li>
+	<li><span class="bolded">Alignment positions:</span>A .txt file is created for each sample-reference pair. 
+		The file includes a list of the kmer sequences (from the sample) and their positions in the reference genome.</li>
+</ul>
+
+{% endblock%}
+

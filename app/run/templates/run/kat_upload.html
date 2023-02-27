@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="border">
+	<form action="{{url_for('run.kat_upload')}}" method="POST" enctype="multipart/form-data" novalidate>
+		{{ form.hidden_tag() }}
+		<h2>New Run:</h2>
+		<p>
+			{{ form.run_name.label }} {{ form.run_name(size=20) }}<br>
+			{% for error in form.run_name.errors %}
+				<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.kmer_size.label }} {{ form.kmer_size(size=4) }}<br>
+			{% for error in form.kmer_size.errors %}
+				<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.samples.label }} {{ form.samples }}<br>
+			{% for error in form.samples.errors %}
+				<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			{{ form.references.label }} {{ form.references }}<br>
+			{% for error in form.references.errors %}
+				<span class="error-message">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit() }}</p>
+	</form>
+</div>
+
+{% endblock %}
+

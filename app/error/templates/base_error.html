@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="flex-display">
+    <div class="column flex-center">
+        <img class="image" src="{{ url_for('static', filename='images/avatar.png') }}" alt="My avatar">
+    </div>
+    <div class="column">
+        <p id="oops">Oops!</p>
+        {% block message %} {% endblock %}
+        {% block error_code %} {% endblock %}
+    </div>
+</div>
+
+
+{% endblock %}

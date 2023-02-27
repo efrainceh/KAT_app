@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>KAT: K-mer Alignment Tool</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press Start 2P">
+	</head>
+	<header>
+		<div class="header-right">
+			{% if current_user.is_anonymous or current_user.username == "guest" %}
+				<a href="{{ url_for('main_site.index') }}" class="header-link">Home</a>
+				<a href="https://www.linkedin.com/in/efrain-ceh-pavia/" target="_blank" class="header-link">LinkedIn</a>
+				<a class="header-link">Code</a>
+			{% endif %}
+			<a href="{{ url_for('main_site.about') }}" class="header-link">About</a>
+			{% if current_user.is_authenticated and current_user.username != "guest" %}
+				<div class="dropdown" id="dropdown">
+					<button class="dropbtn" id="dropbtn">Profile</button>
+					<div class="dropdown-content" id="profile-dropdown">
+						<a href="{{ url_for('user_profile.user_redirect') }}">My Profile</a>
+						<a href="{{ url_for('user_profile.logout') }}">Logout</a>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</header>
+	<!-- <header>
+		<div class="header-right">
+			<div class="dropdown" id="dropdown" style="display:none">
+				<button class="dropbtn" id="dropbtn">Profile</button>
+				<div class="dropdown-content" id="profile-dropdown">
+					<a href="{{ url_for('user_profile.user_redirect') }}">My Profile</a>
+					<a href="{{ url_for('user_profile.logout') }}">Logout</a>
+				</div>
+			</div>
+			<a href="{{ url_for('main_site.index') }}" class="header-link hide">Home</a>
+			<a href="{{ url_for('main_site.about') }}" class="header-link">About</a>
+			<a href="https://www.linkedin.com/in/efrain-ceh-pavia/" target="_blank" class="header-link hide">LinkedIn</a>
+			<a class="header-link hide">Code</a>
+		</div>
+	</header> -->
+	<body>
+		<div class="title-box">
+			<h1 id="title">KAT</h1>
+			<br>
+			<h1 id="subtitle">K-mer Alignment Tool</h1>
+		</div>
+		<div class="block-content">
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+	
+	{% block js %}
+	
+	<script type="text/javascript" src="{{url_for('static', filename='js/dropdown.js')}}"></script>
+	
+	{% endblock %}
+</html>
