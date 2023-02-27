@@ -44,15 +44,23 @@ def user_redirect():
 @login_required
 def delete_user():
 
-    print("deleting...")
+    # Quick out anyone trying to delete Guest user
+    if current_user.username == GUEST:
+        abort(400)
+
+    # Capture user before logging out
     user = User.query.filter_by(id=current_user.id).first_or_404()
+    logout_user()
+
+    # Delete folder and database entry
     user_folder = os.path.join(PROJECT_PATH, user.username)
     if os.path.exists(user_folder) and os.path.isdir(user_folder):
         shutil.rmtree(user_folder)
     db.session.delete(user)
     db.session.commit()
-    print("deleted")
-    return redirect(url_for("main_site.login"))
+    
+    data = {"next_URL" : url_for("main_site.login")}
+    return jsonify(data)
 
 @user_profile.route("/delete_run/<string:run_id>", methods=["DELETE"])
 @login_required

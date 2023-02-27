@@ -17,3 +17,17 @@ document.addEventListener("click", function(e) {
     }
 });
 
+// Delete account link
+const confirmation = () => {
+    if (window.confirm("Are you sure you want to delete your account?")) {
+        deleteUser();
+    }
+}
+
+async function deleteUser() {
+    const URL = "http://127.0.0.1:5000/profile/delete_user";
+    const response = await fetch(URL, {method:"DELETE"});
+    const data = await response.json();
+    alert("Your account has been removed from the server.")
+    window.location.href = data.next_URL;
+}

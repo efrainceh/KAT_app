@@ -21,27 +21,13 @@
 					<button class="dropbtn" id="dropbtn">Profile</button>
 					<div class="dropdown-content" id="profile-dropdown">
 						<a href="{{ url_for('user_profile.user_redirect') }}">My Profile</a>
+						<a onclick="confirmation()">Delete Account</a>
 						<a href="{{ url_for('user_profile.logout') }}">Logout</a>
 					</div>
 				</div>
 			{% endif %}
 		</div>
 	</header>
-	<!-- <header>
-		<div class="header-right">
-			<div class="dropdown" id="dropdown" style="display:none">
-				<button class="dropbtn" id="dropbtn">Profile</button>
-				<div class="dropdown-content" id="profile-dropdown">
-					<a href="{{ url_for('user_profile.user_redirect') }}">My Profile</a>
-					<a href="{{ url_for('user_profile.logout') }}">Logout</a>
-				</div>
-			</div>
-			<a href="{{ url_for('main_site.index') }}" class="header-link hide">Home</a>
-			<a href="{{ url_for('main_site.about') }}" class="header-link">About</a>
-			<a href="https://www.linkedin.com/in/efrain-ceh-pavia/" target="_blank" class="header-link hide">LinkedIn</a>
-			<a class="header-link hide">Code</a>
-		</div>
-	</header> -->
 	<body>
 		<div class="title-box">
 			<h1 id="title">KAT</h1>
