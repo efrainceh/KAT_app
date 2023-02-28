@@ -31,14 +31,14 @@
 			{% for message in get_flashed_messages() %}
 				<span class="error-message">{{ message }}</span>
 			{% endfor %}
-			<p>{{ form.submit() }}</p>
+			<p>{{ form.submit(class_="btn") }}</p>
 		</form>
 	</div>
 	<div class="column border">
 		<form action="{{ url_for('main_site.guest_login') }}" method="POST" novalidate>
 				{{ form.hidden_tag() }}
 				<h2>Sign in as Guest:</h2>
-				<p>{{ form.submit() }}</p>
+				<p>{{ form.submit(class_="btn") }}</p>
 		</form>
 	</div>
 </div>
