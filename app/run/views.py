@@ -85,7 +85,7 @@ def kat_run(kat_runname):
 
 def end_run_cleanup(app, run):
     global runcodes
-    polling2.poll(lambda: runcodes[run.kat_runname] == RUN_END, step=60, timeout=86400)
+    polling2.poll(lambda: runcodes[run.kat_runname] == RUN_END, step=20, timeout=86400)
     del runcodes[run.kat_runname]
     if run.user == GUEST:
         if os.path.exists(run.folder) and os.path.isdir(run.folder):
