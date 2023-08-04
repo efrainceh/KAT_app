@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="flex-display border">
+    <div class="column">
+        <h2>User: <span style="color: black">{{ current_user.username }}</span></h2>
+    </div>
+    <div class="column flex-center">
+        <a href="{{ url_for('run.kat_upload') }}"><input type="submit" class="button" id="newrunbtn" name="New Run" value="New Run"></a>
+    </div>
+</div>
+<div class="flex-display">
+    <div class="column">
+        <table id="table-runs">
+            <tr id="table-header">
+                <th>ID</th>
+                <th>Run</th>
+                <th>kmer_size</th>
+                <th>Date</th>
+                <th>Files</th>
+                <th>Delete</th>
+            </tr>
+            {% for run in runs %}
+                <tr>
+                    <td class="cell" onclick="showFigure(this)">{{ run.id }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.user_runname }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.kmer_size }}</td>
+                    <td class="cell" onclick="showFigure(this)">{{ run.get_date() }}</td>
+                    <td><a href="{{ url_for('result.return_zip',kat_runname=run.kat_runname) }}" 
+                        target="blank" download>{{ run.user_runname }}.zip</a></td>
+                    <td><input type="button" value="X" onclick="deleteTableRow(this)"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="column flex-center">
+        {% if runs %}
+            <img class ="image" id="run-img" src="{{ url_for('result.return_images', kat_runname=runs[0].kat_runname, suffix='_percentage') }}" alt="bar plot of results: hit percentage for selected run">
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+
+<script type="text/javascript" src="{{url_for('user_profile.static', filename='js/table.js')}}"></script>
+
+{% endblock %}

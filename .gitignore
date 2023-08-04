@@ -4,6 +4,7 @@
 # Folders
 flask_session/
 venv
+projects
 
 # Databases
 *.db
